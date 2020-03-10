@@ -1,6 +1,7 @@
-from pathlib import Path
-from cjwparse.api import parse_csv
 import tempfile
+from pathlib import Path
+
+from cjwparse.api import parse_csv
 
 
 def render(arrow_table, params, output_path, **kwargs):
