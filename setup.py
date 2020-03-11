@@ -11,5 +11,7 @@ setup(
     url="https://github.com/CJWorkbench/pastecsv",
     packages=[""],
     py_modules=["pastecsv"],
-    install_requires=["cjwmodule~=1.4"],
+    install_requires=["cjwmodule~=1.4", "cjwparse~=0.0.3"],
+    tests_require=["pytest~=5.3"],
+    extras_require={"tests": ["pytest~=5.3"]},
 )

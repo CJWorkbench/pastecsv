@@ -8,15 +8,16 @@ Developing
 
 First, get up and running:
 
-#. ``python3 ./setup.py test`` # to test
+#. ``docker build .`` # to test
 
 To add a feature:
 
-#. Write a test in ``test_pastecsv.py``
-#. Run ``python3 ./setup.py test`` to prove it breaks
+#. Write a test in ``tests/test_pastecsv.py``
+#. Run ``docker build .`` to prove it breaks
 #. Edit ``pastecsv.py`` to make the test pass
-#. Run ``python3 ./setup.py test`` to prove it works
+#. Run ``docker build .`` to prove it works
 #. Commit and submit a pull request
+
 
 To develop continuously on Workbench:
 
