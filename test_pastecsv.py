@@ -13,6 +13,18 @@ class RenderResult(NamedTuple):
     errors: List[I18nMessage]
 
 
+class Settings(NamedTuple):
+    MAX_ROWS_PER_TABLE: int = 100
+    MAX_COLUMNS_PER_TABLE: int = 100
+    MAX_BYTES_PER_VALUE: int = 100
+    MAX_CSV_BYTES: int = 100
+    MAX_BYTES_TEXT_DATA: int = 100
+    MAX_BYTES_PER_COLUMN_NAME: int = 100
+    MAX_DICTIONARY_PYLIST_N_BYTES: int = 100
+    MIN_DICTIONARY_COMPRESSION_RATIO_PYLIST_N_BYTES: float = 2.0
+    SEP_DETECT_CHUNK_SIZE: int = 100
+
+
 def assert_arrow_table_equals(actual, expected):
     if isinstance(expected, dict):
         expected = pyarrow.table(expected)
@@ -21,11 +33,14 @@ def assert_arrow_table_equals(actual, expected):
     assert actual.to_pydict() == expected.to_pydict()
 
 
-def render_arrow(csv="", has_header_row=True):
+def render_arrow(csv="", has_header_row=True, settings=Settings()):
     with tempfile.NamedTemporaryFile(suffix=".arrow") as tf:
         output_path = Path(tf.name)
         errors = pastecsv.render(
-            None, dict(csv=csv, has_header_row=has_header_row), output_path
+            None,
+            dict(csv=csv, has_header_row=has_header_row),
+            output_path,
+            settings=settings,
         )
         with pyarrow.ipc.open_file(output_path) as reader:
             table = reader.read_all()
