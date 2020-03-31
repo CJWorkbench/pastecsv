@@ -3,9 +3,10 @@ import unittest
 from pathlib import Path
 from typing import List, NamedTuple
 
-import pastecsv
 import pyarrow
 from cjwmodule.i18n import I18nMessage
+
+import pastecsv
 
 
 class RenderResult(NamedTuple):
